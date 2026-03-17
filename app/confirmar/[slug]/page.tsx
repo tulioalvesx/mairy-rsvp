@@ -52,6 +52,19 @@ async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
       return;
     }
 
+    await fetch("/api/send-confirmation", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        nome: form.nome,
+        email: form.email,
+        presenca: form.presenca,
+        quantidade: form.quantidade,
+      }),
+    });
+
     setSubmitted(true);
   } catch (error) {
     alert("Erro ao enviar confirmação.");
