@@ -1,0 +1,181 @@
+.page {
+  min-height: 100vh;
+  background: #050505;
+  color: #fff;
+  padding: 32px 20px;
+  font-family: Arial, sans-serif;
+}
+
+.wrapper {
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.topBar {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.kicker {
+  color: #d8be67;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  font-size: 12px;
+  margin: 0;
+}
+
+.title {
+  font-size: 36px;
+  margin: 12px 0 8px 0;
+}
+
+.text {
+  color: #cfcfcf;
+}
+
+.topActions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.goldButton {
+  border: none;
+  background: #b89024;
+  color: #fff;
+  border-radius: 10px;
+  padding: 12px 18px;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.darkButton {
+  border: 1px solid #3b3216;
+  background: #0b0b0b;
+  color: #fff;
+  border-radius: 10px;
+  padding: 12px 18px;
+  cursor: pointer;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-bottom: 18px;
+}
+
+.card {
+  background: #0b0b0b;
+  border: 1px solid #3b3216;
+  border-radius: 18px;
+  padding: 20px;
+}
+
+.cardLabel {
+  color: #d8be67;
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+
+.cardValue {
+  font-size: 34px;
+  font-weight: 700;
+}
+
+.filterBar {
+  margin-bottom: 18px;
+}
+
+.searchInput {
+  width: 100%;
+  height: 46px;
+  border-radius: 10px;
+  border: 1px solid #403515;
+  background: #121212;
+  color: #fff;
+  padding: 0 12px;
+  box-sizing: border-box;
+}
+
+.tableWrap {
+  overflow-x: auto;
+  background: #0b0b0b;
+  border: 1px solid #3b3216;
+  border-radius: 18px;
+  padding: 8px;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 900px;
+}
+
+.th {
+  text-align: left;
+  padding: 14px;
+  border-bottom: 1px solid #3b3216;
+  color: #d8be67;
+  font-size: 14px;
+}
+
+.td {
+  padding: 14px;
+  border-bottom: 1px solid #221d0e;
+  vertical-align: top;
+  color: #f1f1f1;
+  font-size: 14px;
+}
+
+.emptyTd {
+  padding: 20px;
+  text-align: center;
+  color: #cfcfcf;
+}
+
+@media (max-width: 900px) {
+  .page {
+    padding: 20px 12px;
+  }
+
+  .topBar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .topActions {
+    width: 100%;
+    flex-direction: column;
+  }
+
+  .goldButton,
+  .darkButton {
+    width: 100%;
+  }
+
+  .cards {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .title {
+    font-size: 28px;
+  }
+}
+
+@media (max-width: 640px) {
+  .cards {
+    grid-template-columns: 1fr;
+  }
+
+  .cardValue {
+    font-size: 28px;
+  }
+
+  .table {
+    min-width: 760px;
+  }
+}

@@ -3,6 +3,7 @@
 import { useMemo, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
 import { useRouter } from "next/navigation";
+import styles from "./dashboard.module.css";
 
 type RSVP = {
   id: string;
@@ -92,95 +93,95 @@ export default function AdminDashboardClient({
   }
 
   return (
-    <main style={styles.page}>
-      <div style={styles.wrapper}>
-        <div style={styles.topBar}>
+    <main className={styles.page}>
+      <div className={styles.wrapper}>
+        <div className={styles.topBar}>
           <div>
-            <p style={styles.kicker}>Admin</p>
-            <h1 style={styles.title}>Resumo de confirmações</h1>
-            <p style={styles.text}>Evento: painel principal</p>
+            <p className={styles.kicker}>Admin</p>
+            <h1 className={styles.title}>Resumo de confirmações</h1>
+            <p className={styles.text}>Evento: painel principal</p>
           </div>
 
-          <div style={styles.topActions}>
-            <button onClick={exportCSV} style={styles.goldButton}>
+          <div className={styles.topActions}>
+            <button onClick={exportCSV} className={styles.goldButton}>
               Exportar CSV
             </button>
 
             <button
               onClick={() => router.push("/admin/settings")}
-              style={styles.darkButton}
+              className={styles.darkButton}
             >
               Configurações
             </button>
 
-            <button onClick={handleLogout} style={styles.darkButton}>
+            <button onClick={handleLogout} className={styles.darkButton}>
               Sair
             </button>
           </div>
         </div>
 
-        <div style={styles.cards}>
-          <div style={styles.card}>
-            <div style={styles.cardLabel}>Total de respostas</div>
-            <div style={styles.cardValue}>{totalRespostas}</div>
+        <div className={styles.cards}>
+          <div className={styles.card}>
+            <div className={styles.cardLabel}>Total de respostas</div>
+            <div className={styles.cardValue}>{totalRespostas}</div>
           </div>
 
-          <div style={styles.card}>
-            <div style={styles.cardLabel}>Confirmados</div>
-            <div style={styles.cardValue}>{confirmados.length}</div>
+          <div className={styles.card}>
+            <div className={styles.cardLabel}>Confirmados</div>
+            <div className={styles.cardValue}>{confirmados.length}</div>
           </div>
 
-          <div style={styles.card}>
-            <div style={styles.cardLabel}>Total de pessoas</div>
-            <div style={styles.cardValue}>{totalPessoas}</div>
+          <div className={styles.card}>
+            <div className={styles.cardLabel}>Total de pessoas</div>
+            <div className={styles.cardValue}>{totalPessoas}</div>
           </div>
 
-          <div style={styles.card}>
-            <div style={styles.cardLabel}>Não irão</div>
-            <div style={styles.cardValue}>{ausencias.length}</div>
+          <div className={styles.card}>
+            <div className={styles.cardLabel}>Não irão</div>
+            <div className={styles.cardValue}>{ausencias.length}</div>
           </div>
         </div>
 
-        <div style={styles.filterBar}>
+        <div className={styles.filterBar}>
           <input
             placeholder="Buscar por nome, e-mail ou telefone"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            style={styles.searchInput}
+            className={styles.searchInput}
           />
         </div>
 
-        <div style={styles.tableWrap}>
-          <table style={styles.table}>
+        <div className={styles.tableWrap}>
+          <table className={styles.table}>
             <thead>
               <tr>
-                <th style={styles.th}>Nome</th>
-                <th style={styles.th}>E-mail</th>
-                <th style={styles.th}>Telefone</th>
-                <th style={styles.th}>Vai?</th>
-                <th style={styles.th}>Pessoas</th>
-                <th style={styles.th}>Acompanhantes</th>
-                <th style={styles.th}>Observação</th>
+                <th className={styles.th}>Nome</th>
+                <th className={styles.th}>E-mail</th>
+                <th className={styles.th}>Telefone</th>
+                <th className={styles.th}>Vai?</th>
+                <th className={styles.th}>Pessoas</th>
+                <th className={styles.th}>Acompanhantes</th>
+                <th className={styles.th}>Observação</th>
               </tr>
             </thead>
             <tbody>
               {filtered.map((item) => (
                 <tr key={item.id}>
-                  <td style={styles.td}>{item.nome}</td>
-                  <td style={styles.td}>{item.email}</td>
-                  <td style={styles.td}>{item.telefone || "-"}</td>
-                  <td style={styles.td}>
+                  <td className={styles.td}>{item.nome}</td>
+                  <td className={styles.td}>{item.email}</td>
+                  <td className={styles.td}>{item.telefone || "-"}</td>
+                  <td className={styles.td}>
                     {item.vai_comparecer ? "Sim" : "Não"}
                   </td>
-                  <td style={styles.td}>{item.quantidade_pessoas || 1}</td>
-                  <td style={styles.td}>{item.acompanhantes || "-"}</td>
-                  <td style={styles.td}>{item.observacao || "-"}</td>
+                  <td className={styles.td}>{item.quantidade_pessoas || 1}</td>
+                  <td className={styles.td}>{item.acompanhantes || "-"}</td>
+                  <td className={styles.td}>{item.observacao || "-"}</td>
                 </tr>
               ))}
 
               {filtered.length === 0 && (
                 <tr>
-                  <td style={styles.emptyTd} colSpan={7}>
+                  <td className={styles.emptyTd} colSpan={7}>
                     Nenhum resultado encontrado.
                   </td>
                 </tr>
@@ -192,124 +193,3 @@ export default function AdminDashboardClient({
     </main>
   );
 }
-
-const styles: { [key: string]: React.CSSProperties } = {
-  page: {
-    minHeight: "100vh",
-    backgroundColor: "#050505",
-    color: "#fff",
-    padding: "32px 20px",
-    fontFamily: "Arial, sans-serif",
-  },
-  wrapper: {
-    maxWidth: "1280px",
-    margin: "0 auto",
-  },
-  topBar: {
-    display: "flex",
-    justifyContent: "space-between",
-    alignItems: "flex-start",
-    gap: "16px",
-    marginBottom: "24px",
-  },
-  kicker: {
-    color: "#d8be67",
-    textTransform: "uppercase",
-    letterSpacing: "3px",
-    fontSize: "12px",
-    margin: 0,
-  },
-  title: {
-    fontSize: "36px",
-    margin: "12px 0 8px 0",
-  },
-  text: {
-    color: "#cfcfcf",
-  },
-  topActions: {
-    display: "flex",
-    gap: "10px",
-    flexWrap: "wrap",
-  },
-  goldButton: {
-    border: "none",
-    backgroundColor: "#b89024",
-    color: "#fff",
-    borderRadius: "10px",
-    padding: "12px 18px",
-    cursor: "pointer",
-    fontWeight: 700,
-  },
-  darkButton: {
-    border: "1px solid #3b3216",
-    backgroundColor: "#0b0b0b",
-    color: "#fff",
-    borderRadius: "10px",
-    padding: "12px 18px",
-    cursor: "pointer",
-  },
-  cards: {
-    display: "grid",
-    gridTemplateColumns: "repeat(4, 1fr)",
-    gap: "16px",
-    marginBottom: "18px",
-  },
-  card: {
-    backgroundColor: "#0b0b0b",
-    border: "1px solid #3b3216",
-    borderRadius: "18px",
-    padding: "20px",
-  },
-  cardLabel: {
-    color: "#d8be67",
-    fontSize: "14px",
-    marginBottom: "8px",
-  },
-  cardValue: {
-    fontSize: "34px",
-    fontWeight: 700,
-  },
-  filterBar: {
-    marginBottom: "18px",
-  },
-  searchInput: {
-    width: "100%",
-    height: "46px",
-    borderRadius: "10px",
-    border: "1px solid #403515",
-    backgroundColor: "#121212",
-    color: "#fff",
-    padding: "0 12px",
-    boxSizing: "border-box",
-  },
-  tableWrap: {
-    overflowX: "auto",
-    backgroundColor: "#0b0b0b",
-    border: "1px solid #3b3216",
-    borderRadius: "18px",
-    padding: "8px",
-  },
-  table: {
-    width: "100%",
-    borderCollapse: "collapse",
-  },
-  th: {
-    textAlign: "left",
-    padding: "14px",
-    borderBottom: "1px solid #3b3216",
-    color: "#d8be67",
-    fontSize: "14px",
-  },
-  td: {
-    padding: "14px",
-    borderBottom: "1px solid #221d0e",
-    verticalAlign: "top",
-    color: "#f1f1f1",
-    fontSize: "14px",
-  },
-  emptyTd: {
-    padding: "20px",
-    textAlign: "center",
-    color: "#cfcfcf",
-  },
-};
