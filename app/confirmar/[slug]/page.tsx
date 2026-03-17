@@ -24,10 +24,39 @@ export default function Page() {
     setForm((prev) => ({ ...prev, [field]: value }));
   }
 
-  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault();
+async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+  e.preventDefault();
+
+  try {
+    const response = await fetch("/api/rsvp", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        slug: "mairy-pain-80",
+        nome: form.nome,
+        email: form.email,
+        telefone: form.telefone,
+        presenca: form.presenca,
+        quantidade: form.quantidade,
+        acompanhantes: form.acompanhantes,
+        observacao: form.observacao,
+      }),
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      alert(data.error || "Erro ao salvar confirmação.");
+      return;
+    }
+
     setSubmitted(true);
+  } catch (error) {
+    alert("Erro ao enviar confirmação.");
   }
+}
 
   return (
     <main style={styles.page}>
