@@ -1,8 +1,8 @@
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
-import AdminDashboardClient from "./AdminDashboardClient";
+import AdminSettingsClient from "./AdminSettingsClient";
 
-export default async function AdminDashboardPage() {
+export default async function AdminSettingsPage() {
   const supabase = await createClient();
 
   const {
@@ -13,10 +13,11 @@ export default async function AdminDashboardPage() {
     redirect("/admin/login");
   }
 
-  const { data: rsvps } = await supabase
-    .from("rsvps")
+  const { data: event } = await supabase
+    .from("events")
     .select("*")
-    .order("created_at", { ascending: false });
+    .eq("slug", "mairy-pain-80")
+    .single();
 
-  return <AdminDashboardClient rsvps={rsvps || []} />;
+  return <AdminSettingsClient event={event} />;
 }
